@@ -1,5 +1,11 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -24,25 +30,52 @@ public class TestPlan {
         webform.enterEmail();
         webform.enterPassword();
         webform.pressLogInButton();
-       // driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-       // actual_URL = driver.getCurrentUrl();
-        //System.out.println(actual_URL);
-        //Assert.assertEquals(actual_URL, Utils.expected_URL);
-      webform.Menu();
-      webform.pressLogOut();
-      //  actual_URL = driver.getCurrentUrl();
-       // System.out.println(actual_URL);
-        //Assert.assertEquals(actual_URL, Utils.Base_URL);
-    }
+        webform.homePage();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        String current_URL = driver.getCurrentUrl();
+        driver.navigate().to(current_URL);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+       js.executeScript("window.scrollBy(0,300)");
+        webform.openPost();
+        webform.addPhoto();
+        WebDriverWait wait = new WebDriverWait(driver,60);
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div[1]/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div/div/div[3]/div[2]/div")));
+        webform.finalisePost();
+//        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 
-//    @Test(testName = "Logout")
- //   public void Logout(){
-  //      driver.navigate().to(Utils.expected_URL);
-   //     WebForms webForm = new WebForms(driver);
-    //    webForm.pressLogOut();
-     //   actual_URL = driver.getCurrentUrl();
-    //  Assert.assertEquals(actual_URL, Utils.Base_URL);
-    //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        js.executeScript("window.scrollBy(0,1075)");
+//        webform.PressLike();
+//        webform.open_Comment();
+//        webform.doComment();
+//        webform.clickShare();
+//        webform.postShare();
+//        js.executeScript("window.scrollBy(0,-800)");
+//        webform.viewTimeline();
+
+ //
+ //       webform.writePost();
+ //       webform.finalisePost();
+
+//        webform.viewTimeline();
+//        webform.updatePhoto();
+        //  webform.chooseUpload();
+
+    }
 
    // @AfterSuite
     //public static void cleanUp(){
